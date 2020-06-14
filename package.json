@@ -4,6 +4,7 @@
   "description": "An example of babylon.js WebXR (AR mode)",
   "main": "index.js",
   "dependencies": {
+    "@babylonjs/core": "^4.2.0-alpha.20",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"

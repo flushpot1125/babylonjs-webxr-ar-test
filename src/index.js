@@ -18,6 +18,10 @@ const engine = new Engine(canvas);
 var scene = new Scene(engine);
 
 
+var createScene = async function(){
+
+    return scene;
+};
 var camera = new ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 12, Vector3.Zero(), scene);
 		
 //camera.radius=1.0;
