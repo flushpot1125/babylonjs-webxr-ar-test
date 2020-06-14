@@ -20,6 +20,8 @@ module.exports = {
     devServer: {
         contentBase: outputPath,
         watchContentBase: true,//html,cssなどに変更があればブラウザリロードを自動実行
+        host: '0.0.0.0',
+        disableHostCheck: true,
         port: 3000
     }
 }

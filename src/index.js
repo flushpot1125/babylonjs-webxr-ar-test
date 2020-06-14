@@ -7,7 +7,7 @@ import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { ParticleSystem } from "@babylonjs/core/Particles";
 import {AbstractMesh} from "@babylonjs/core/Meshes/abstractMesh";
 import {WebXRDefaultExperience} from "@babylonjs/core/XR/webXRDefaultExperience";
-
+import {WebXRExperienceHelper} from "@babylonjs/core/XR/webXRExperienceHelper";
 
 // Get the canvas element from the DOM.
 const canvas = document.getElementById("renderCanvas");
@@ -47,12 +47,9 @@ var createScene = async function(){
     shinyLineSphereParticleSource.position = new Vector3(0, 0, 0);
     shinyLineSphereParticleSystem.emitter = shinyLineSphereParticleSource;
     
-    const we = new WebXRDefaultExperience();
-    const xr = await we.CreateAsync(
-        scene, {
-            disableDefaultUI: false,
-        }
-      );
+    //const we = new WebXRDefaultExperience();
+    var xrHelper = await WebXRExperienceHelper.CreateAsync(scene, /* optional configuration options */ )
+ 
 
    
     /*
