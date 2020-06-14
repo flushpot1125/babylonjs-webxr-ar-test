@@ -19,7 +19,7 @@ var sceneToRender = null;
 var createDefaultEngine = function() { return new Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
        
 
-var createScene = function(){
+var createScene = async function(){
 
     // Create our first scene.
     var scene = new Scene(engine);
@@ -44,7 +44,14 @@ var createScene = function(){
     var shinyLineSphereParticleSource = new AbstractMesh("particleSource", scene);
     shinyLineSphereParticleSource.position = new Vector3(0, 0, 0);
     shinyLineSphereParticleSystem.emitter = shinyLineSphereParticleSource;
-    
+    /*
+    const xr = await scene.createDefaultXRExperienceAsync({
+        uiOptions: {
+            sessionMode: 'immersive-ar'
+        }
+    });
+    */
+
     return scene;
 };
 var engine;
@@ -55,8 +62,9 @@ try {
     engine = createDefaultEngine();
 }
 scene = createScene();
-sceneToRender = scene;
-
+//sceneToRender = scene;
+scene.then(returnedScene => { sceneToRender = returnedScene; });
+        
 // Render every frame
 engine.runRenderLoop(function () {
     if (sceneToRender) {
