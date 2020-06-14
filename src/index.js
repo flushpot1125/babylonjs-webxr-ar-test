@@ -6,6 +6,7 @@ import {ArcRotateCamera} from "@babylonjs/core/Cameras/arcRotateCamera";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { ParticleSystem } from "@babylonjs/core/Particles";
 import {AbstractMesh} from "@babylonjs/core/Meshes/abstractMesh";
+import {WebXRDefaultExperience} from "@babylonjs/core/XR/webXRDefaultExperience";
 
 
 // Get the canvas element from the DOM.
@@ -15,9 +16,10 @@ const canvas = document.getElementById("renderCanvas");
 //const engine = new Engine(canvas);
 
 var scene = null;
+var engine;
 var sceneToRender = null;
 var createDefaultEngine = function() { return new Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
-       
+            
 
 var createScene = async function(){
 
@@ -44,6 +46,15 @@ var createScene = async function(){
     var shinyLineSphereParticleSource = new AbstractMesh("particleSource", scene);
     shinyLineSphereParticleSource.position = new Vector3(0, 0, 0);
     shinyLineSphereParticleSystem.emitter = shinyLineSphereParticleSource;
+    
+    const we = new WebXRDefaultExperience();
+    const xr = await we.CreateAsync(
+        scene, {
+            disableDefaultUI: false,
+        }
+      );
+
+   
     /*
     const xr = await scene.createDefaultXRExperienceAsync({
         uiOptions: {
@@ -54,14 +65,14 @@ var createScene = async function(){
 
     return scene;
 };
-var engine;
+
 try {
     engine = createDefaultEngine();
 } catch(e) {
     console.log("the available createEngine function failed. Creating the default engine instead");
     engine = createDefaultEngine();
 }
-scene = createScene();
+scene = createScene();;
 //sceneToRender = scene;
 scene.then(returnedScene => { sceneToRender = returnedScene; });
         
