@@ -1,8 +1,10 @@
 
 //参考：https://qiita.com/10mi8o/items/2477f2640291f0ce6687
 
-
+const fs = require('fs');
 const path = require('path');
+const { fstat } = require('fs');
+const { Server } = require('http');
 //const outputPath = path.resolve(__dirname, 'dist');
 const outputPath = path.resolve(__dirname, './');//distではなくプロジェクトのトップに変更
 module.exports = {
@@ -22,6 +24,10 @@ module.exports = {
         watchContentBase: true,//html,cssなどに変更があればブラウザリロードを自動実行
         host: '0.0.0.0',
         disableHostCheck: true,
-        port: 3000
+        port: 3000,
+        https:true,
+        key:fs.readFileSync('./certkeys/naf-server.key'),
+        cert:fs.readFileSync('./certkeys/naf-server.crt')
+
     }
 }
