@@ -60,7 +60,12 @@ var createScene = async function(){
     });
     */
 
-    const ar = WebXRExperienceHelper.CreateAsync(scene);
+    const ar = WebXRExperienceHelper.CreateAsync(scene,{
+        ignorenativecameratransformation:true,
+        uiOptions:{
+            sessionMode: 'immersive-ar'
+        }
+    });
     
 
     return scene;
