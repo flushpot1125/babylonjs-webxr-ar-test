@@ -60,7 +60,7 @@ var createScene = async function(){
     });
     */
 
-    const ar = WebXRExperienceHelper.CreateAsync(scene,{
+    const ar = await WebXRExperienceHelper.CreateAsync(scene,{
         ignorenativecameratransformation:true,
         uiOptions:{
             sessionMode: 'immersive-ar'
