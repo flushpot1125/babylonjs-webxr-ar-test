@@ -5,10 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const { fstat } = require('fs');
 const { Server } = require('http');
+const CopyPlugin = require('copy-webpack-plugin');
 //const outputPath = path.resolve(__dirname, 'dist');
-const outputPath = path.resolve(__dirname, './');//distではなくプロジェクトのトップに変更
+const outputPath = path.resolve(__dirname, 'dist');
 module.exports = {
-    
+    mode :'procudtion',
     entry: './src/index.js',//起点となるファイルのみを指定。src以下のファイルを個別に指定する必要はない
     output: {
         // バンドルしてmain.jsとして出力（これは実体として生成されないが、index.htmlなどで呼び出し記述が必要）
@@ -29,5 +30,13 @@ module.exports = {
         key:fs.readFileSync('./certkeys/naf-server.key'),
         cert:fs.readFileSync('./certkeys/naf-server.crt')
 
-    }
+    },
+
+    plugins:[
+        new CopyPlugin({
+            patterns:[
+                {from : "src/index.html", to:path.resolve(__dirname, "dist")}
+            ]
+        })
+    ]
 }
